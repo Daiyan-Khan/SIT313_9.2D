@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './css/CheckoutForm.css';
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate(); // Initialize navigate for navigation
   const [error, setError] = useState(null);
   const [isPaymentLoading, setPaymentLoading] = useState(false);
+  const [isSuccessModalOpen, setSuccessModalOpen] = useState(false); // State for success modal
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -53,20 +56,34 @@ const CheckoutForm = () => {
       // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
         console.log('Payment successful!');
-        // You might want to redirect or show a success message here
+        setSuccessModalOpen(true); // Open success modal
+        setPaymentLoading(false); // Reset loading state
+        setTimeout(() => {
+          navigate('/'); // Redirect to homepage after 2 seconds
+        }, 2000); // Adjust timing as needed
       }
-      setPaymentLoading(false); // Reset loading state
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement /> {/* Use the built-in CardElement */}
-      <button disabled={!stripe || isPaymentLoading}>
-        {isPaymentLoading ? 'Processing...' : 'Pay'}
-      </button>
-      {error && <div>{error}</div>}
-    </form>
+    <>
+      <form className='checkout-form' onSubmit={handleSubmit}>
+        <CardElement /> {/* Use the built-in CardElement */}
+        <button disabled={!stripe || isPaymentLoading}>
+          {isPaymentLoading ? 'Processing...' : 'Pay'}
+        </button>
+        {error && <div>{error}</div>}
+      </form>
+
+      {isSuccessModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Payment Successful!</h2>
+            <p>Thank you for your payment. You will be redirected to the homepage shortly.</p>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

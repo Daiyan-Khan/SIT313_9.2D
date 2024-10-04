@@ -46,7 +46,7 @@ fetch('http://localhost:5000/subscribe', {
   };
 
   return (
-    <div className="header">
+    <div className="subscribe-section" style={{marginRight:'200px'}}>
       <div className='sign-up-text' style={{paddingTop:"15px"}}><h2>Sign up for daily insider</h2></div>
       
       {/* Input field for email */}
@@ -57,6 +57,7 @@ fetch('http://localhost:5000/subscribe', {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
+        style={{display:'flex'}}
       />
       {/* Submit button */}
       <Button type="button" text="Submit" className="submit" onClick={handleSubmit} />

@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { TextArea, Form } from 'semantic-ui-react';
+import { Controlled as CodeMirror } from 'react-codemirror2';
+import ReactMarkdown from 'react-markdown';
 import ImageUploadComponent from '../ImageUpload'; 
 import { db } from '../utils/firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/material.css';
+import 'codemirror/mode/javascript/javascript';
 import '../css/PostPage.css';
 
 /**
@@ -12,6 +17,7 @@ const Question = () => {
   // State variables for managing title, description, tags, current tag input, image URLs, and loading status
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [code, setCode] = useState('');  // State for code content
   const [tags, setTags] = useState([]);
   const [currentTag, setCurrentTag] = useState('');
   const [imageUrls, setImageUrls] = useState([]);
@@ -49,6 +55,7 @@ const Question = () => {
       const questionData = {
         title,
         description,
+        code,        // Include the code content in the submission
         tags,
         imageUrls,
         userEmail,
@@ -59,6 +66,7 @@ const Question = () => {
       console.log('Question successfully written with ID: ', docRef.id);
       // Reset form fields after successful submission
       setDescription('');
+      setCode('');  // Clear the code content
       setTags([]);
       setImageUrls([]);
     } catch (error) {
@@ -85,20 +93,47 @@ const Question = () => {
               border: '1px solid #ccc',
               boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' 
             }} 
+            
           />
         </Form.Field>
+        <ImageUploadComponent onUpload={handleImageUpload} />
         <Form.Field>
           <label style={{ color: 'white' }}>Describe your problem:</label>
           <TextArea 
             placeholder="Enter a description of your issue" 
             value={description} 
             onChange={(e) => setDescription(e.target.value)} 
-            style={{ minHeight: 400, width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '12px' }} 
+            style={{ minHeight: 200, width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '12px' }} 
           />
         </Form.Field>
 
-        {/* Component for uploading images */}
-        <ImageUploadComponent onUpload={handleImageUpload} />
+        {/* CodeMirror for writing code */}
+        <Form.Field>
+          <label style={{ color: 'white' }}>Write your code:</label>
+          <CodeMirror
+            value={code}
+            options={{
+              mode: 'javascript',
+              theme: 'material',
+              lineNumbers: true,
+            }}
+            onBeforeChange={(editor, data, value) => {
+              setCode(value);  // Update code state
+            }}
+            style={{ minHeight: 300, backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '12px' }}
+          />
+        </Form.Field>
+
+        {/* Markdown Preview */}
+        <Form.Field>
+          <label style={{ color: 'white' }}>Preview:</label>
+          <div className="markdown-preview" style={{ padding: '10px', backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '12px' }}>
+            <ReactMarkdown>{description + '\n\n' + '```javascript\n' + code + '\n```'}</ReactMarkdown>
+          </div>
+        </Form.Field>
+
+        {/* Image Upload Component */}
+        
         
         {/* Display uploaded images */}
         <div className="uploaded-images" style={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>

@@ -3,6 +3,7 @@
     text-align: center; /* Center text and elements horizontally */
     padding: 20px; /* Add some padding around the page content */
     color: whitesmoke ;
+    margin-top:800px;
 }
 .home-page-img {
     margin-top: 1000px; /* Adjust margin as needed */
@@ -91,14 +92,14 @@
   
   .ArticleSection{
     display: flex;
-    margin-left:300px;
+    margin-left:100px;
   }
   
  /* Style for the Tutorial Section */
 .TutorialSection {
     display: flex;
     flex-direction: row; /* Stack items vertically */
-    margin-left: 300px;
+    margin-left: 100px;
     color: whitesmoke; /* Text color */
     border-radius: 12px; /* Rounded corners */
 }

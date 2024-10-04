@@ -6,7 +6,7 @@ import Button from './Button'; // Reusable button component
 import Footer from './Footer'; // Reusable footer component
 import Subscribe from './Subscribe'; // Reusable sign-up component
 import Chat from './Chat'; // Import the Chat component
-import VideoUpload from './VideoUpload'; // Import the Video Upload component
+import { faker } from '@faker-js/faker'; // Import faker for random data
 import './css/Home.css'; // Styles specific to the Home component
 
 const Home = () => {
@@ -28,9 +28,26 @@ const Home = () => {
         navigate('/login'); // Redirect to login page
     };
 
+    // Generate random articles
+    const articles = Array.from({ length: 3 }).map(() => ({
+        image: `https://picsum.photos/200/300?random=${Math.floor(Math.random() * 1000)}`,
+        title: faker.lorem.sentence(),
+        description: faker.lorem.paragraph(),
+        author: faker.person.fullName(),
+        rating: (Math.random() * 5).toFixed(1), // Random rating between 0 and 5
+    }));
+
+    // Generate random tutorials
+    const tutorials = Array.from({ length: 3 }).map(() => ({
+        image: `https://picsum.photos/200/300?random=${Math.floor(Math.random() * 1000)}`,
+        title: faker.lorem.sentence(),
+        description: faker.lorem.paragraph(),
+        author: faker.person.fullName(), // Instead of faker.name.findName()
+        rating: (Math.random() * 5).toFixed(1), // Random rating between 0 and 5
+    }));
+
     return (
         <div className="home-page">
-            
             <img className='home-page-img'
                 style={{ width: 1500 }} 
                 src={require('./images/Deakin.avif')} 
@@ -65,27 +82,16 @@ const Home = () => {
             {/* Featured Articles Section */}
             <h1>Featured Articles</h1>
             <div className="ArticleSection">
-                <Card 
-                    image={require('./images/React.avif')}
-                    title="Article 1" 
-                    description="Description for Article 1." 
-                    author="Author 1" 
-                    rating="3.5" 
-                />
-                <Card 
-                    image={require('./images/React.avif')}
-                    title="Article 2" 
-                    description="Description for Article 2." 
-                    author="Author 2" 
-                    rating="4.0" 
-                />
-                <Card 
-                    image={require('./images/React.avif')}
-                    title="Article 3" 
-                    description="Description for Article 3." 
-                    author="Author 3" 
-                    rating="4.5" 
-                />
+                {articles.map((article, index) => (
+                    <Card
+                        key={index} // Unique key for each item
+                        image={article.image}
+                        title={article.title}
+                        description={article.description}
+                        author={article.author}
+                        rating={article.rating}
+                    />
+                ))}
             </div>
             <Link to="/articles-page"> {/* Link to the Articles page */}
                 <Button text="See all articles" />
@@ -94,36 +100,22 @@ const Home = () => {
             {/* Featured Tutorials Section */}
             <h1 className="TutorialHeadline">Featured Tutorials</h1>
             <div className="TutorialSection">
-                <Card 
-                    image={require('./images/React.avif')} // Use the same image as articles
-                    title="Tutorial 1" 
-                    description="Description for Tutorial 1." 
-                    author="Author A" 
-                    rating="4.5" 
-                />
-                <Card 
-                    image={require('./images/React.avif')} // Use the same image as articles
-                    title="Tutorial 2" 
-                    description="Description for Tutorial 2." 
-                    author="Author B" 
-                    rating="4.0" 
-                />
-                <Card 
-                    image={require('./images/React.avif')} // Use the same image as articles
-                    title="Tutorial 3" 
-                    description="Description for Tutorial 3." 
-                    author="Author C" 
-                    rating="4.8" 
-                />
+                {tutorials.map((tutorial, index) => (
+                    <Card
+                        key={index} // Unique key for each item
+                        image={tutorial.image}
+                        title={tutorial.title}
+                        description={tutorial.description}
+                        author={tutorial.author}
+                        rating={tutorial.rating}
+                    />
+                ))}
             </div>
             <Button text="See all tutorials" onClick={() => navigate('/tutorials')} /> {/* Button to navigate to all tutorials */}
 
-            {/* Upload Your Own Video Button */}
-            {isLoggedIn && <VideoUpload />} {/* Render the VideoUpload component if user is logged in */}
-
             <div className='subscribe'>
                 {/* SignUp Section */}
-                <Subscribe  /> {/* Render the sign-up component */}
+                <Subscribe /> {/* Render the sign-up component */}
             </div>
 
             {/* Chat Component */}
