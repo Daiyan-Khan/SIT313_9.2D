@@ -5,6 +5,9 @@ const dotenv = require('dotenv');
 const nodemailer = require('nodemailer');
 const OpenAI = require('openai');
 const speakeasy = require('speakeasy'); // For generating and verifying 2FA codes
+const stripe = require('stripe')('sk_test_51Q69BpRx2PGR0NoJ8ePpezdegdsKptqQmWLQyXBMYbzRitibhnspJRB9Jm9qNltnI9wyhJoAMfOyU2KCGDliJvQT00bqeL8a2T'); // Use your secret key here
+const router = express.Router();
+
 
 dotenv.config();
 
@@ -145,6 +148,21 @@ app.post("/chat", async (req, res) => {
     }
 });
 
+app.post('/create-payment-intent', async (req, res) => {
+    const { amount } = req.body;
+  
+    try {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount,
+        currency: 'usd', // Adjust the currency as needed
+      });
+      
+      res.json({ clientSecret: paymentIntent.client_secret });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to create payment intent.' });
+    }
+  });
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

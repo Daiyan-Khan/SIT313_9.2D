@@ -1,0 +1,37 @@
+/* PaymentPage.css */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Light background color for the page */
+}
+
+.payment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+}
+
+.card-container {
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px; /* Inner spacing */
+    width: 300px; /* Fixed width for the form */
+}
+
+h1 {
+    text-align: center; /* Center the heading */
+    color: #333; /* Dark color for the text */
+}
+
+.error {
+    color: red; /* Red color for error messages */
+    text-align: center; /* Center the error message */
+    margin-top: 10px; /* Space above the error message */
+}
+
+form{
+    width: 500px;
+}

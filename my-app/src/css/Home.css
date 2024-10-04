@@ -4,9 +4,16 @@
     padding: 20px; /* Add some padding around the page content */
     color: whitesmoke ;
 }
-.home-page-img{
-    margin-top: 600px;
+.home-page-img {
+    margin-top: 1000px; /* Adjust margin as needed */
+    height: 500px; /* Set a fixed height */
+    width: 50%; /* Keep width as percentage or adjust as needed */
+    display: block; /* Ensures image takes full width if it's a block-level element */
+    margin-left: auto; /* Centers the image horizontally */
+    margin-right: auto; /* Centers the image horizontally */
+    object-fit: cover; /* Ensures image fits well within the container without distortion */
 }
+
 /* Style for the search bar form */
 .search-bar {
     width: 1000px;

@@ -1,0 +1,54 @@
+/* PlansPage.css */
+
+.pricing-plans {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    background-color: #f9f9f95d;
+  }
+  
+  .pricing-plans h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .plan {
+    background-color: #ffffff56;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .plan h2 {
+    font-size: 1.8rem;
+    color: #0066cc;
+    margin-bottom: 10px;
+  }
+  
+  .plan p {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .plan a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ae00ffd4;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+  }
+
+  .plan a:hover{
+    background-color: #e914cd;
+  }
+  

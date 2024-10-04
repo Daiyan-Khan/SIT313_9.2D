@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // For navigation
-import Header from './Header'; // Reusable header component
+import Navbar from './Navbar'; // Import the Navbar component
 import Card from './Card'; // Reusable card component for articles/tutorials
 import Button from './Button'; // Reusable button component
 import Footer from './Footer'; // Reusable footer component
@@ -9,12 +9,6 @@ import Chat from './Chat'; // Import the Chat component
 import VideoUpload from './VideoUpload'; // Import the Video Upload component
 import './css/Home.css'; // Styles specific to the Home component
 
-/**
- * Home component.
- * This component serves as the main landing page for the application,
- * displaying welcome text, search functionality, articles, tutorials,
- * and user authentication actions.
- */
 const Home = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track user login status
     const navigate = useNavigate(); // Hook for programmatic navigation
@@ -36,18 +30,17 @@ const Home = () => {
 
     return (
         <div className="home-page">
-            <Header /> {/* Render the header component */}
+            
             <img className='home-page-img'
                 style={{ width: 1500 }} 
                 src={require('./images/Deakin.avif')} 
                 alt="Deakin Image" 
             />
+            <Navbar /> {/* Add the Navbar component here */}
 
             {/* Welcome and Search Section */}
             <h1>Welcome to the Home Page</h1>
-            <Link to="/find-question" className="nav-link">
-                <button type="button">Find Question</button>
-            </Link> 
+            
             <div className="search-bar">
                 <p>Dev@DEAKIN</p>
                 <input type="text" placeholder="Search..." />

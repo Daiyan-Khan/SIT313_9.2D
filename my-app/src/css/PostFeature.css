@@ -1,0 +1,62 @@
+/* PostFeature.css */
+
+.post-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    background-color: #f1f1f1;
+  }
+  
+  .post-section h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .post-editor {
+    width: 100%;
+    max-width: 800px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .post-editor .CodeMirror {
+    height: auto;
+    max-height: 500px;
+  }
+  
+  .post-preview {
+    width: 100%;
+    max-width: 800px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post-preview h2 {
+    font-size: 2rem;
+    color: #0066cc;
+    margin-bottom: 20px;
+  }
+  
+  .post-preview p {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  .post-preview pre {
+    background-color: #f9f9f9;
+    border-left: 3px solid #0066cc;
+    padding: 10px;
+    font-size: 1rem;
+    overflow-x: auto;
+  }
+  
